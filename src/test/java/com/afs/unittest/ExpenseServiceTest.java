@@ -2,6 +2,7 @@ package com.afs.unittest;
 
 import com.afs.unittest.Project.Project;
 import com.afs.unittest.Project.ProjectType;
+import com.afs.unittest.exception.UnexpectedProjectTypeException;
 import com.afs.unittest.expense.ExpenseType;
 import org.junit.jupiter.api.Test;
 
@@ -68,10 +69,12 @@ class ExpenseServiceTest {
     @Test
     void should_throw_unexpected_project_exception_if_project_is_invalid() {
         // given
+        Project project = new Project(ProjectType.UNEXPECTED_PROJECT_TYPE, "Unexpected Project");
+        ExpenseService expenseService = new ExpenseService();
 
         // when
         // then
-        //assertThrows();
+        assertThrows(UnexpectedProjectTypeException.class, () -> expenseService.getExpenseCodeByProjectTypeAndName(project));
 
     }
 }
